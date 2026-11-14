@@ -201,7 +201,7 @@ function App() {
       )}
       <nav className="nav-shell" aria-label="Main navigation">
         <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-          <a href="#top" onClick={() => setMenuOpen(false)}>Home</a>
+          <a className="nav-home" href="#top" onClick={() => setMenuOpen(false)}>Home</a>
           {navItems.map((item) => <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{item}</a>)}
         </div>
         <a className="wordmark" href="#top" aria-label="Sonam home">sonam<span>.</span></a>
@@ -218,7 +218,7 @@ function App() {
         <div className="hero-scribble">hello<br />there<span>✳</span></div>
         <div className="hero-copy">
           <p className="eyebrow"><span className="eyebrow-dot" /> creative strategist <span className="slash">/</span> digital marketer</p>
-          <h1>Hi, I&apos;m<br /><em>Sonam</em>.<br />Creative minds, <em>strategic</em> thinking.<br /><span>Stories that connect.</span></h1>
+          <h1>Hi, I&apos;m <em>Sonam</em>.<br />Creative minds, <em>strategic</em> thinking.<br /><span>Stories that connect.</span></h1>
           <p className="hero-intro">Exploring the intersection of creative strategy, digital marketing and content creation — one idea at a time.</p>
           <div className="hero-actions"><a className="button button-dark" href="#work">Explore my work <ArrowDownRight size={18} /></a><a className="text-link" href="#contact">Let&apos;s connect <ArrowUpRight size={16} /></a></div>
         </div>
