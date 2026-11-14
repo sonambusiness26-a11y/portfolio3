@@ -42,10 +42,55 @@ function Reveal({ children, className = '' }: { children: React.ReactNode; class
   return <div className={`reveal ${className}`}>{children}</div>;
 }
 
+function IntroDoodle() {
+  return (
+    <svg className="intro-doodle" viewBox="0 0 520 340" aria-hidden="true">
+      <path className="intro-twinkle" d="m31 238 7 11 12 6-12 6-7 12-6-12-12-6 12-6 6-11Z" />
+      <path className="intro-twinkle" d="m481 238 5 8 9 5-9 4-5 9-4-9-9-4 9-5 4-8Z" />
+      <circle className="intro-dot" cx="260" cy="33" r="4" />
+      <g className="intro-eyes">
+        <path className="intro-lash" d="M91 117C63 110 46 97 36 78m42 61c-27 0-47-10-61-27" />
+        <path className="intro-eye-shape" d="M70 163c0-48 31-80 77-80 49 0 80 32 80 80 0 45-33 75-80 75-45 0-77-30-77-75Z" />
+        <g className="intro-right-eye-open">
+          <path className="intro-lash" d="M429 117c28-7 45-20 55-39m-42 61c27 0 47-10 61-27" />
+          <path className="intro-eye-shape" d="M450 163c0-48-31-80-77-80-49 0-80 32-80 80 0 45 33 75 80 75 45 0 77-30 77-75Z" />
+        </g>
+        <g className="intro-right-eye-wink">
+          <path className="intro-wink" d="M291 168c35-34 91-35 128 0" />
+          <path className="intro-wink-lashes" d="M414 163c22-1 35-10 45-25m-37 34c20 0 34-7 45-20" />
+        </g>
+        <g className="intro-pupils">
+          <ellipse className="intro-glint" cx="164" cy="132" rx="20" ry="23" />
+          <ellipse className="intro-glint" cx="111" cy="191" rx="11" ry="14" />
+          <g className="intro-right-eye-open">
+            <ellipse className="intro-glint" cx="356" cy="132" rx="20" ry="23" />
+            <ellipse className="intro-glint" cx="409" cy="191" rx="11" ry="14" />
+          </g>
+        </g>
+      </g>
+      <g className="intro-smile">
+        <ellipse className="intro-cheek" cx="106" cy="283" rx="25" ry="12" />
+        <ellipse className="intro-cheek" cx="414" cy="283" rx="25" ry="12" />
+        <path className="intro-smile-mouth" d="M215 274c24 32 66 40 90 0" />
+      </g>
+    </svg>
+  );
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [filter, setFilter] = useState('All work');
   const [submitted, setSubmitted] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
+
+  useEffect(() => {
+    if (!showIntro) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [showIntro]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -141,13 +186,31 @@ function App() {
 
   return (
     <main>
-      <nav className="nav-shell" aria-label="Main navigation">
-        <a className="wordmark" href="#top" aria-label="Sonam home">sonam<span>.</span></a>
-        <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-          {navItems.map((item) => <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{item}</a>)}
-          <a className="nav-cta" href="mailto:heysonam03@gmail.com">Let&apos;s talk <ArrowUpRight size={16} /></a>
+      {showIntro && (
+        <div
+          className="intro-splash"
+          aria-hidden="true"
+          onAnimationEnd={(event) => {
+            if (event.target === event.currentTarget) setShowIntro(false);
+          }}
+        >
+          <div className="intro-face">
+            <IntroDoodle />
+          </div>
         </div>
-        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">{menuOpen ? <X /> : <Menu />}</button>
+      )}
+      <nav className="nav-shell" aria-label="Main navigation">
+        <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
+          <a className="nav-home" href="#top" onClick={() => setMenuOpen(false)}>Home</a>
+          {navItems.map((item) => <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{item}</a>)}
+        </div>
+        <a className="wordmark" href="#top" aria-label="Sonam home">sonam<span>.</span></a>
+        <div className="nav-tools">
+          <a className="nav-icon-link" href="https://instagram.com/womaniya.irl_" target="_blank" rel="noreferrer" aria-label="Visit Womaniya on Instagram"><Instagram size={15} /></a>
+          <a className="nav-icon-link" href="mailto:heysonam03@gmail.com" aria-label="Email Sonam"><Mail size={15} /></a>
+          <a className="nav-cta" href="mailto:heysonam03@gmail.com">Let&apos;s talk <ArrowUpRight size={15} /></a>
+        </div>
+        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation" aria-expanded={menuOpen}>{menuOpen ? <X /> : <Menu />}</button>
       </nav>
 
       <section className="hero paper-grid stack-page" id="top">
