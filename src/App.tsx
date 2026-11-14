@@ -218,7 +218,7 @@ function App() {
         <div className="hero-scribble">hello<br />there<span>✳</span></div>
         <div className="hero-copy">
           <p className="eyebrow"><span className="eyebrow-dot" /> creative strategist <span className="slash">/</span> digital marketer</p>
-          <h1>Hi, I&apos;m <em>Sonam</em>.<br />Creative minds, <em>strategic</em> thinking.<br /><span>Stories that connect.</span></h1>
+          <h1>Hi, I&apos;m<br className="hero-name-break" /> <em>Sonam</em>.<br />Creative minds, <em>strategic</em> thinking.<br /><span>Stories that connect.</span></h1>
           <p className="hero-intro">Exploring the intersection of creative strategy, digital marketing and content creation — one idea at a time.</p>
           <div className="hero-actions"><a className="button button-dark" href="#work">Explore my work <ArrowDownRight size={18} /></a><a className="text-link" href="#contact">Let&apos;s connect <ArrowUpRight size={16} /></a></div>
         </div>
